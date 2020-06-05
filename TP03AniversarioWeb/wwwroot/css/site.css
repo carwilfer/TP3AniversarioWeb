@@ -7,9 +7,12 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.form-inline{
+    text-align: left;
+}
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {

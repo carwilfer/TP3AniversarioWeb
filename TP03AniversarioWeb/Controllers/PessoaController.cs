@@ -104,7 +104,7 @@ namespace TP03AniversarioWeb.Controllers
                 return View();
             }
         }
-
+        /*
         public ActionResult BuscarPessoa()
         {
             using (var db = new EstudoEntities())
@@ -133,6 +133,6 @@ namespace TP03AniversarioWeb.Controllers
                                     DataNascimento = pessoacre.DataNascimento
                                 };
             }
-        }
+        }*/
     }
 }
