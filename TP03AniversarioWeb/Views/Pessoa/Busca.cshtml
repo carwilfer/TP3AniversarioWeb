@@ -1,0 +1,47 @@
+﻿@model TP03AniversarioWeb.Models.Pessoa
+
+@{
+    ViewBag.Title = "Cliente";
+    WebGrid grid = new WebGrid(canPage: false, canSort: false);
+    grid.Bind(Model.Pessoa,
+              autoSortAndPage: false
+    );
+}
+
+@{
+    ViewData["Title"] = "Busca";
+}
+
+@using (Html.BeginForm())
+{
+    <form class="form-horizontal" role="form">
+        <table class="table">
+            <tr>
+                <td> Nome</td>
+                <td>@Html.TextBoxFor(model => model.Nome)</td>
+            </tr>
+            <tr>
+                <td>Cidade</td>
+                <td>@Html.TextBoxFor(model => model.Email)</td>
+            </tr>
+            <tr>
+                <td>Estado</td>
+                <td>@Html.TextBoxFor(model => model.DateNascimento)</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" id="search" title="Pesquisar" value="Pesquisar" />
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div id="resultadoPesquisa">
+        @grid.GetHtml(
+        fillEmptyRows: true, alternatingRowStyle: "alternate-row", headerStyle: "grid-header", footerStyle: "grid-footer",
+        columns: new[] {
+            grid.Column("Nome"),
+            grid.Column("Email"),
+            grid.Column("DataNascimento")
+        })
+    </div>
+}

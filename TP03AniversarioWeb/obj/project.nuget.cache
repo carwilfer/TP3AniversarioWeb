@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "A4/kT2BTF1apVlNMOfgKPK35zSviWzYQPp0Y3VFZdGOn+fB956kvZ0ZIdi+7G+rq5iK90Zs2ZYfIbmaxQ69zHA==",
+  "dgSpecHash": "oJyL+Wngxpst8bDVyOui8MCiuwPR7rf4HRYQEGkfk3i2Z5FpqRoJEdXXiwe8r9vjOT/Mq4jnf3ot3X8xUf0y0w==",
   "success": true,
   "projectFilePath": "C:\\Users\\Carlos Ferreira\\Desktop\\Desenvolvimento de Aplicações Web ASP .NET\\TP03AniversarioWeb\\TP03AniversarioWeb\\TP03AniversarioWeb.csproj",
   "expectedPackageFiles": [
@@ -110,7 +110,8 @@
     "C:\\Users\\Carlos Ferreira\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.3\\system.threading.tasks.extensions.4.5.3.nupkg.sha512",
     "C:\\Users\\Carlos Ferreira\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\Carlos Ferreira\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\Carlos Ferreira\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\Carlos Ferreira\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\Carlos Ferreira\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
   ],
   "logs": []
 }

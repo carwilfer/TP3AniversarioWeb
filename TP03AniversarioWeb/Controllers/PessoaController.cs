@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,13 +13,15 @@ namespace TP03AniversarioWeb.Controllers
     {
         public static List<Pessoa> Pessoas { get; set; } = new List<Pessoa>();
         // GET: Pessoa
-        public ActionResult Index()
+        public ActionResult Index(string? message)
         {
+            ViewBag.Message = message;
             return View(Pessoas);
         }
 
         // GET: Pessoa/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details([FromQuery] Guid id, Pessoa pessoa)
+        
         {
             return View(Pessoas);
         }
@@ -38,8 +41,7 @@ namespace TP03AniversarioWeb.Controllers
             {
                 // TODO: Add insert logic here
                 Pessoas.Add(pessoa);
-
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction($"Index","Pessoa", new { message = "Pessoa cadastrada com sucesso" });
             }
             catch
             {
@@ -68,7 +70,7 @@ namespace TP03AniversarioWeb.Controllers
                 pessoa.Id = id;
                 Pessoas.Add(pessoa);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction($"Index", "Pessoa", new { message = "Pessoa cadastrada com sucesso" });
             }
             catch
             {
@@ -95,11 +97,41 @@ namespace TP03AniversarioWeb.Controllers
                 var pessoa = Pessoas.FirstOrDefault(x => x.Id == id);
                 Pessoas.Remove(pessoa);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction($"Index", "Pessoa", new { menssage = "Pessoa excluida com sucesso" });
             }
             catch
             {
                 return View();
+            }
+        }
+
+        public ActionResult BuscarPessoa()
+        {
+            using (var db = new EstudoEntities())
+            {
+                var _pessoa = db.Pessoas.ToList();
+                var data = new Pessoa()
+                {
+                    Pessoas = _pessoa
+                };
+                return View(data);
+            }
+        }
+        [HttpPost]
+        public ActionResult BuscarPessoa(Pessoa _pessoaCriada)
+        {
+            using (var db = new EstudoEntities())
+            {
+                var pesquisar = from pessoacre in db.Pessoas
+                                where ((_pessoaCriada.Nome == null)
+                                || (pessoacre.Nome == _pessoaCriada.Nome.Trim()))
+                                select new
+                                {
+                                    Id = pessoacre.Id,
+                                    Nome = pessoacre.Nome,
+                                    Email = pessoacre.Email,
+                                    DataNascimento = pessoacre.DataNascimento
+                                };
             }
         }
     }

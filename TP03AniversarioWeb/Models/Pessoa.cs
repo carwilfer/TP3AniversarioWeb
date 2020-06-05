@@ -12,11 +12,12 @@ namespace TP03AniversarioWeb.Models
         
         [Required]
         [Display(Name = "Nome")]
-        public string Nome { get; set; }
+        public String Nome { get; set; }
         [Required]
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public String Email { get; set; }
         [Required]
-        public DateTime Date { get; set; }
+        [Display(Name = "Data Nascimento")]
+        public DateTime DateNascimento { get; set; }
     }
 }
