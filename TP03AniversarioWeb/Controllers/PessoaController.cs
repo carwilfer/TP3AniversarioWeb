@@ -13,21 +13,22 @@ namespace TP03AniversarioWeb.Controllers
     {
         public static List<Pessoa> Pessoas { get; set; } = new List<Pessoa>();
         // GET: Pessoa
-        public ActionResult Index(string? message)
+        public IActionResult Index(string? message)
         {
             ViewBag.Message = message;
             return View(Pessoas);
         }
 
         // GET: Pessoa/Details/5
-        public ActionResult Details([FromQuery] Guid id, Pessoa pessoa)
+        public IActionResult Details(int id)
         
         {
-            return View(Pessoas);
+            var pessoa = Pessoas.FirstOrDefault(x => x.Id == id);
+            return View(pessoa);
         }
 
         // GET: Pessoa/Create
-        public ActionResult Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -35,7 +36,7 @@ namespace TP03AniversarioWeb.Controllers
         // POST: Pessoa/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Pessoa pessoa)
+        public IActionResult Create(Pessoa pessoa)
         {
             try
             {
@@ -50,7 +51,7 @@ namespace TP03AniversarioWeb.Controllers
         }
 
         // GET: Pessoa/Edit/5
-        public ActionResult Edit(int id)
+        public IActionResult Edit(int id)
         {
             var pessoa = Pessoas.FirstOrDefault(x => x.Id == id);
             return View(pessoa);
@@ -59,7 +60,7 @@ namespace TP03AniversarioWeb.Controllers
         // POST: Pessoa/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Pessoa pessoa)
+        public IActionResult Edit(int id, Pessoa pessoa)
         {
             try
             {
@@ -79,7 +80,7 @@ namespace TP03AniversarioWeb.Controllers
         }
 
         // GET: Pessoa/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
             var pessoa = Pessoas.FirstOrDefault(x => x.Id == id);
             return View(pessoa);
@@ -88,11 +89,13 @@ namespace TP03AniversarioWeb.Controllers
         // POST: Pessoa/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
                 // TODO: Add delete logic here
+                if (ModelState.IsValid == false)
+                    return View();
 
                 var pessoa = Pessoas.FirstOrDefault(x => x.Id == id);
                 Pessoas.Remove(pessoa);
@@ -104,6 +107,8 @@ namespace TP03AniversarioWeb.Controllers
                 return View();
             }
         }
+
+
         /*
         public ActionResult BuscarPessoa()
         {

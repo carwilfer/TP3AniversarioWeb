@@ -10,7 +10,7 @@ namespace TP03AniversarioWeb.Models
     {
         public int Id { get; set; }
         
-        [Required]
+        [Required(ErrorMessage = "Campo nome da tarefa deve ser preenchido")]
         [Display(Name = "Nome")]
         public String Nome { get; set; }
 
