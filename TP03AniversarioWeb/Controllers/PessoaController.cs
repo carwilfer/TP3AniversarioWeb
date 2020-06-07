@@ -64,16 +64,19 @@ namespace TP03AniversarioWeb.Controllers
         // POST: Pessoa/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([FromQuery]  Guid id, Pessoa pessoaModel)
+        public IActionResult Edit([FromQuery]  string id, Pessoa pessoaModel)
         {
             try
             {
                 //var guid = Guid.Parse(id);
-                var pessoaEdit = Pessoas.FirstOrDefault(x => x.Id == id);
+                var pessoaEdit = Pessoas.FirstOrDefault(x => x.Id == Guid.Parse(id));
+                pessoaEdit.Email = pessoaModel.Email;
+                pessoaEdit.DateNascimento = pessoaModel.DateNascimento;
+               
 
-                Pessoas.Remove(pessoaEdit);
-                pessoaModel.Id = id;
-                Pessoas.Add(pessoaModel);
+                //Pessoas.Remove(pessoaEdit);
+                //pessoaModel.Id = guid;
+                //Pessoas.Add(pessoaModel);
 
                 return RedirectToAction("Index", "Pessoa", new { message = "Pessoa cadastrada com sucesso" });
             }
