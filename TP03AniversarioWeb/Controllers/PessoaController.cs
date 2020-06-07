@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,14 +19,10 @@ namespace TP03AniversarioWeb.Controllers
         }
 
         // GET: Pessoa/Details/5
-        public ActionResult Details(Guid id, Pessoa pessoaD)
+        public ActionResult Details(Guid id)
         
         {
-            if (ModelState.IsValid == false)
-                return View();
-
-
-            var pessoa = Pessoas.Where(x => x.Id == id).FirstOrDefault();
+            var pessoa = Pessoas.FirstOrDefault(x => x.Id == id);
             return View(pessoa);
         }
 
@@ -44,6 +39,9 @@ namespace TP03AniversarioWeb.Controllers
         {
             try
             {
+                if (ModelState.IsValid == false)
+                    return View();
+
                 pessoa.Id = Guid.NewGuid();
 
                 // TODO: Add insert logic here
@@ -59,7 +57,7 @@ namespace TP03AniversarioWeb.Controllers
         // GET: Pessoa/Edit/5
         public IActionResult Edit([FromQuery] Guid id)
         {
-            var pessoa = Pessoas.Where(x => x.Id == id).FirstOrDefault();
+            var pessoa = Pessoas.FirstOrDefault(x => x.Id == id);
             return View(pessoa);
         }
 
@@ -70,13 +68,12 @@ namespace TP03AniversarioWeb.Controllers
         {
             try
             {
-                if (ModelState.IsValid == false)
-                    return View();
-
-                var pessoaEdit = Pessoas.Where(x => x.Id == id).FirstOrDefault();
+                //var guid = Guid.Parse(id);
+                var pessoaEdit = Pessoas.FirstOrDefault(x => x.Id == id);
 
                 Pessoas.Remove(pessoaEdit);
-                Pessoas.Add(pessoaEdit);
+                pessoaModel.Id = id;
+                Pessoas.Add(pessoaModel);
 
                 return RedirectToAction("Index", "Pessoa", new { message = "Pessoa cadastrada com sucesso" });
             }
@@ -85,8 +82,6 @@ namespace TP03AniversarioWeb.Controllers
                 return View();
             }
         }
-
- 
 
         // GET: Pessoa/Delete/5
         public ActionResult Delete(Guid id)

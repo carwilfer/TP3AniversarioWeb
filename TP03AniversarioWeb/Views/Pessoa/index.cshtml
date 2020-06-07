@@ -1,27 +1,19 @@
 ﻿@model IEnumerable<TP03AniversarioWeb.Models.Pessoa>
 
 @{
-    ViewData["Title"] = "index";
+    ViewData["Title"] = "Index";
 }
 
+<h1>Cadastro de aniversários</h1>
 
-    <form class="form-inline">
-        <h1>TP3 - Data de aniversário</h1>
-        <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-        <!-- <a class="btn btn-outline-success my-2 my-sm-0" href="/pessoa.Id/Pesquisar?id">Pesquisar</a> -->
-    </form>
-
-
-@if (!String.IsNullOrEmpty(ViewBag.Massege))
-{
-    <div class="alert alert-success" role="alert">
-        @ViewBag.Message
-    </div>
-}
+<form class="form-inline">
+    <h1>TP3 - Data de aniversário</h1>
+    <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+</form>
 
 <p>
-    <a asp-action="Create">Cadastro de Pessoas</a>
+    <a asp-action="Create">Cadastrar Nomes</a>
 </p>
 <table class="table">
     <thead>
