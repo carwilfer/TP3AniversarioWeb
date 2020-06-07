@@ -9,6 +9,7 @@
         <h1>TP3 - Data de aniversário</h1>
         <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+        <!-- <a class="btn btn-outline-success my-2 my-sm-0" href="/pessoa.Id/Pesquisar?id">Pesquisar</a> -->
     </form>
 
 
@@ -57,9 +58,9 @@
                     @Html.DisplayFor(modelItem => item.DateNascimento)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    <a class="btn btn-warning btn-sm" href="/Pessoa/Edit?id=@item.Id">Editar</a>|
+                    <a class="btn btn-warning btn-sm" href="/Pessoa/Details?id=@item.Id">Detalhes</a> |
+                    <a class="btn btn-warning btn-sm" href="/Pessoa/Delete?id=@item.Id">Deletar</a>
                 </td>
             </tr>
         }

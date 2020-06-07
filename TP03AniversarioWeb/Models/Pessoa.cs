@@ -8,7 +8,7 @@ namespace TP03AniversarioWeb.Models
 {
     public class Pessoa
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         
         [Required(ErrorMessage = "Campo nome da tarefa deve ser preenchido")]
         [Display(Name = "Nome")]

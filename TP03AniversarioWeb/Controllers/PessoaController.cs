@@ -20,15 +20,19 @@ namespace TP03AniversarioWeb.Controllers
         }
 
         // GET: Pessoa/Details/5
-        public IActionResult Details(int id)
+        public ActionResult Details(Guid id, Pessoa pessoaD)
         
         {
-            var pessoa = Pessoas.FirstOrDefault(x => x.Id == id);
+            if (ModelState.IsValid == false)
+                return View();
+
+
+            var pessoa = Pessoas.Where(x => x.Id == id).FirstOrDefault();
             return View(pessoa);
         }
 
         // GET: Pessoa/Create
-        public IActionResult Create()
+        public ActionResult Create()
         {
             return View();
         }
@@ -36,13 +40,15 @@ namespace TP03AniversarioWeb.Controllers
         // POST: Pessoa/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Pessoa pessoa)
+        public ActionResult Create(Pessoa pessoa)
         {
             try
             {
+                pessoa.Id = Guid.NewGuid();
+
                 // TODO: Add insert logic here
                 Pessoas.Add(pessoa);
-                return RedirectToAction($"Index","Pessoa", new { message = "Pessoa cadastrada com sucesso" });
+                return RedirectToAction("Index","Pessoa", new { message = "Pessoa cadastrada com sucesso" });
             }
             catch
             {
@@ -51,27 +57,28 @@ namespace TP03AniversarioWeb.Controllers
         }
 
         // GET: Pessoa/Edit/5
-        public IActionResult Edit(int id)
+        public IActionResult Edit([FromQuery] Guid id)
         {
-            var pessoa = Pessoas.FirstOrDefault(x => x.Id == id);
+            var pessoa = Pessoas.Where(x => x.Id == id).FirstOrDefault();
             return View(pessoa);
         }
 
         // POST: Pessoa/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Pessoa pessoa)
+        public IActionResult Edit([FromQuery]  Guid id, Pessoa pessoaModel)
         {
             try
             {
-                // TODO: Add update logic here
-                var pessoaOld = Pessoas.FirstOrDefault(x => x.Id == id);
-                Pessoas.Remove(pessoaOld);
+                if (ModelState.IsValid == false)
+                    return View();
 
-                pessoa.Id = id;
-                Pessoas.Add(pessoa);
+                var pessoaEdit = Pessoas.Where(x => x.Id == id).FirstOrDefault();
 
-                return RedirectToAction($"Index", "Pessoa", new { message = "Pessoa cadastrada com sucesso" });
+                Pessoas.Remove(pessoaEdit);
+                Pessoas.Add(pessoaEdit);
+
+                return RedirectToAction("Index", "Pessoa", new { message = "Pessoa cadastrada com sucesso" });
             }
             catch
             {
@@ -79,8 +86,10 @@ namespace TP03AniversarioWeb.Controllers
             }
         }
 
+ 
+
         // GET: Pessoa/Delete/5
-        public IActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
             var pessoa = Pessoas.FirstOrDefault(x => x.Id == id);
             return View(pessoa);
@@ -89,18 +98,16 @@ namespace TP03AniversarioWeb.Controllers
         // POST: Pessoa/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Guid id, IFormCollection collection)
         {
             try
             {
                 // TODO: Add delete logic here
-                if (ModelState.IsValid == false)
-                    return View();
 
                 var pessoa = Pessoas.FirstOrDefault(x => x.Id == id);
                 Pessoas.Remove(pessoa);
 
-                return RedirectToAction($"Index", "Pessoa", new { menssage = "Pessoa excluida com sucesso" });
+                return RedirectToAction("Index", "Pessoa", new { menssage = "Pessoa excluida com sucesso" });
             }
             catch
             {
@@ -108,35 +115,47 @@ namespace TP03AniversarioWeb.Controllers
             }
         }
 
-
         /*
-        public ActionResult BuscarPessoa()
+        [HttpGet]
+        public ActionResult Pesquisa()
         {
-            using (var db = new EstudoEntities())
-            {
-                var _pessoa = db.Pessoas.ToList();
-                var data = new Pessoa()
-                {
-                    Pessoas = _pessoa
-                };
-                return View(data);
-            }
+            return View();
         }
         [HttpPost]
-        public ActionResult BuscarPessoa(Pessoa _pessoaCriada)
+        public ActionResult Pesquisa(string texto)
+        {
+            return View(Pessoas.Where(x => x.Nome.Contains(texto)).OrderBy(x => x.Nome));
+        }
+        */
+        /*
+        public ActionResult Pesquisar()
+        {
+             return View(pessoa);
+        }
+        [HttpPost]
+        public ActionResult Pesquisar(Pessoa pessoa)
         {
             using (var db = new EstudoEntities())
             {
-                var pesquisar = from pessoacre in db.Pessoas
-                                where ((_pessoaCriada.Nome == null)
-                                || (pessoacre.Nome == _pessoaCriada.Nome.Trim()))
+               var pessoa = Pessoas.FirstOrDefault(x => x.Id == id)
+                                where ((pessoa.Nome == null)
+                                || (pessoas.Nome == pessoa.Nome.Trim()))
                                 select new
                                 {
-                                    Id = pessoacre.Id,
-                                    Nome = pessoacre.Nome,
-                                    Email = pessoacre.Email,
-                                    DataNascimento = pessoacre.DataNascimento
+                                    Id = pessoas.Id,
+                                    Nome = pessoas.Nome,
+                                    Email = pessoas.Email,
+                                    DataNascimento = pessoas.DataNascimento
                                 };
+                foreach (var reg in nomePesquisa)
+                {
+                    Cliente clientevalor = new Cliente();
+                    clientevalor.Id = reg.Id;
+                    clientevalor.Nome = reg.Nome;
+                    listaClientes.Add(clientevalor);
+                }
+                pessoa.Clientes = listaClientes;
+                return View(pessoa);
             }
         }*/
     }
