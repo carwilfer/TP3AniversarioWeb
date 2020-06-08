@@ -157,49 +157,5 @@ namespace TP03AniversarioWeb.Controllers
 
         }
 
-
-        /*
-        [HttpGet]
-        public ActionResult Pesquisa()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Pesquisa(string texto)
-        {
-            return View(Pessoas.Where(x => x.Nome.Contains(texto)).OrderBy(x => x.Nome));
-        }
-        */
-        /*
-        public ActionResult Pesquisar()
-        {
-             return View(pessoa);
-        }
-        [HttpPost]
-        public ActionResult Pesquisar(Pessoa pessoa)
-        {
-            using (var db = new EstudoEntities())
-            {
-               var pessoa = Pessoas.FirstOrDefault(x => x.Id == id)
-                                where ((pessoa.Nome == null)
-                                || (pessoas.Nome == pessoa.Nome.Trim()))
-                                select new
-                                {
-                                    Id = pessoas.Id,
-                                    Nome = pessoas.Nome,
-                                    Email = pessoas.Email,
-                                    DataNascimento = pessoas.DataNascimento
-                                };
-                foreach (var reg in nomePesquisa)
-                {
-                    Cliente clientevalor = new Cliente();
-                    clientevalor.Id = reg.Id;
-                    clientevalor.Nome = reg.Nome;
-                    listaClientes.Add(clientevalor);
-                }
-                pessoa.Clientes = listaClientes;
-                return View(pessoa);
-            }
-        }*/
     }
-    }
+}
