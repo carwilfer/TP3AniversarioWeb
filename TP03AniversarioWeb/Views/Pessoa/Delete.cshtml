@@ -39,6 +39,9 @@
     </dl>
     
     <form asp-action="Delete">
+        <div class="form-group">
+            <input hidden="hidden" asp-for="Id" class="form-control" />
+        </div>
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Voltar pra lista</a>
     </form>

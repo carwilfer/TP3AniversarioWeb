@@ -64,19 +64,32 @@ namespace TP03AniversarioWeb.Controllers
         // POST: Pessoa/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([FromQuery]  string id, Pessoa pessoaModel)
+        public IActionResult Edit(Pessoa pessoaModel)
         {
             try
             {
-                //var guid = Guid.Parse(id);
-                var pessoaEdit = Pessoas.FirstOrDefault(x => x.Id == Guid.Parse(id));
+                var pessoaEdit = Pessoas.FirstOrDefault(x => x.Id == pessoaModel.Id);
                 pessoaEdit.Email = pessoaModel.Email;
                 pessoaEdit.DateNascimento = pessoaModel.DateNascimento;
-               
-
-                //Pessoas.Remove(pessoaEdit);
-                //pessoaModel.Id = guid;
-                //Pessoas.Add(pessoaModel);
+                
+                return RedirectToAction("Index", "Pessoa", new { message = "Pessoa cadastrada com sucesso" });
+            }
+            catch
+            {
+                return View();
+            }
+        }
+/*
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit([FromQuery] string id, Pessoa pessoaModel)
+        {
+            try
+            {
+                var guid = Guid.Parse(id);
+                var pessoaEdit = Pessoas.FirstOrDefault(x => x.Id == guid);
+                pessoaEdit.Email = pessoaModel.Email;
+                pessoaEdit.DateNascimento = pessoaModel.DateNascimento;
 
                 return RedirectToAction("Index", "Pessoa", new { message = "Pessoa cadastrada com sucesso" });
             }
@@ -85,6 +98,9 @@ namespace TP03AniversarioWeb.Controllers
                 return View();
             }
         }
+*/
+
+
 
         // GET: Pessoa/Delete/5
         public ActionResult Delete(Guid id)
@@ -96,14 +112,16 @@ namespace TP03AniversarioWeb.Controllers
         // POST: Pessoa/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(Guid id, IFormCollection collection)
+        public ActionResult Delete(Pessoa pessoalModel)
         {
             try
             {
                 // TODO: Add delete logic here
 
-                var pessoa = Pessoas.FirstOrDefault(x => x.Id == id);
-                Pessoas.Remove(pessoa);
+                //var pessoa = Pessoas.FirstOrDefault(x => x.Id == pessoalModel.Id);
+                //Pessoas.Remove(pessoa);
+
+                Pessoas.RemoveAll(p => p.Id == pessoalModel.Id);
 
                 return RedirectToAction("Index", "Pessoa", new { menssage = "Pessoa excluida com sucesso" });
             }
@@ -112,6 +130,33 @@ namespace TP03AniversarioWeb.Controllers
                 return View();
             }
         }
+
+
+        // GET: Pessoa/Create
+        public ActionResult Pesquisar()
+        {
+            return View(Pessoas);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Busca(Pessoa pessoaModel)
+        {
+            try
+            {
+                var pessoaList = Pessoas.Where(x => x.Nome == pessoaModel.Nome | 
+                x.Email == pessoaModel.Email | 
+                x.DateNascimento == pessoaModel.DateNascimento);
+
+                return View("Pesquisar", pessoaList == null ? new List<Pessoa>() : pessoaList);
+            }
+            catch
+            {
+                return View();
+            }
+
+        }
+
 
         /*
         [HttpGet]
@@ -157,4 +202,4 @@ namespace TP03AniversarioWeb.Controllers
             }
         }*/
     }
-}
+    }

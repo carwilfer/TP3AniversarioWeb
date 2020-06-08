@@ -114,3 +114,4 @@ C:\Users\Carlos Ferreira\Desktop\Desenvolvimento de Aplicações Web ASP .NET\TP
 C:\Users\Carlos Ferreira\Desktop\Desenvolvimento de Aplicações Web ASP .NET\TP03AniversarioWeb\TP03AniversarioWeb\obj\Debug\netcoreapp3.1\Razor\Views\Pessoa\Edit.cshtml.g.cs
 C:\Users\Carlos Ferreira\Desktop\Desenvolvimento de Aplicações Web ASP .NET\TP03AniversarioWeb\TP03AniversarioWeb\obj\Debug\netcoreapp3.1\Razor\Views\Pessoa\index.cshtml.g.cs
 C:\Users\Carlos Ferreira\Desktop\Desenvolvimento de Aplicações Web ASP .NET\TP03AniversarioWeb\TP03AniversarioWeb\obj\Debug\netcoreapp3.1\Razor\Views\Pessoa\View.cshtml.g.cs
+C:\Users\Carlos Ferreira\Desktop\Desenvolvimento de Aplicações Web ASP .NET\TP03AniversarioWeb\TP03AniversarioWeb\obj\Debug\netcoreapp3.1\Razor\Views\Pessoa\Pesquisar.cshtml.g.cs
